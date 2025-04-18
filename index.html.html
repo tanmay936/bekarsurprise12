@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthday giglu</title>
+  <style>
+    body {
+      text-align: center;
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+      color: #d410aa;
+      font-size: medium;
+
+      background-color: #f0e0f0 ;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 20px;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    /* Flowers Section */
+    .flowers {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 120px;
+    }
+    .flower {
+      position: relative;
+      width: 60px;
+      margin-top: 40px;
+    }
+    .stem {
+      width: 10px;
+      height: 150px;
+      background: #069014de;
+      margin: 0 auto;
+    }
+    .petals {
+      position: absolute;
+      top: -50px; /* position above the stem */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 70px;
+    }
+    .petal {
+      position: absolute;
+      width: 50px;
+      height: 90px;
+      /* Use a radial gradient for a realistic petal look */
+      background: radial-gradient(circle, #dcbbe9, #a540e8);
+      /* Adjust the border radius for a natural petal shape */
+      border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
+      transform-origin: top center;
+      animation: bloom 2s ease-in-out;
+    }
+    .petal:nth-child(1) { transform: rotate(0deg) translateY(-15px); }
+    .petal:nth-child(2) { transform: rotate(72deg) translateY(-15px); }
+    .petal:nth-child(3) { transform: rotate(144deg) translateY(-15px); }
+    .petal:nth-child(4) { transform: rotate(216deg) translateY(-15px); }
+    .petal:nth-child(5) { transform: rotate(288deg) translateY(-15px); }
+    @keyframes bloom {
+      0% { transform: scale(0.5) translateY(10px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .center {
+      position: absolute;
+      top: -55px;
+      left: 25%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 28px;
+      background: rgb(224, 231, 20);
+      border-radius: 50%;
+    }
+    /* Cake Section */
+    #cakeContainer {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 90px;
+    }
+    /* Two-tier 3D Oval Cake (Red Velvet) */
+    .cake {
+      position: relative;
+      width: 280px;
+      height: 170px;
+      background: #f1224b; /* red velvet color */ 
+      border-radius: 140px / 100px; /* 2D oval shape with 3D effect via shadow */ 
+           box-shadow: 0 8px 16px rgba(0,0,0,0.3); 
+               border: 2px solid #d93966;    
+                 margin-bottom: 10px;    }
+    .top-tier {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 100px;
+      background: #f1224b;
+      border-radius: 90px / 60px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border: 2px solid #e70e39;
+    }
+    .candles {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .candle {
+      width: 10px;
+      height: 30px;
+      background: rgb(255, 255, 255);
+      position: relative;
+    }
+    .flame {
+      width: 8px;
+      height: 16px;
+      background: rgb(245, 136, 53);
+      border-radius: 50%;
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    /* Split Cake (Hidden Initially) */
+    .cake-split {
+      display: flex;
+      justify-content: space-between;
+      width: 280px;
+      margin-top: 20px;
+    }
+    .piece {
+      width: 130px;
+      height: 150px;
+      background: #e70e39;
+      border-radius: 140px / 100px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      border: 2px solid #e70e39;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h1> 🎉🎊 HAPPY BIRTHDAY GIGLU 🥳🎉</h1>
+  <div class="flowers">
+    <!-- Five Flowers -->
+    <div class="flower">
+      <div class="stem"></div>
+      <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="center"></div>
+    </div>
+    <div class="flower">
+      <div class="stem"></div>
+      <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="center"></div>
+    </div>
+    <div class="flower">
+      <div class="stem"></div>
+      <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="center"></div>
+    </div>
+    <div class="flower">
+      <div class="stem"></div>
+      <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="center"></div>
+    </div>
+    <div class="flower">
+      <div class="stem"></div>
+      <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="center"></div>
+    </div>
+  </div>
+  
+  <label for="nameSelect">Choose a name:</label>
+  <select id="nameSelect">
+    <option value="Miss Unique">Miss Unique😌</option>
+    <option value="Dobee">Dobi😎</option>
+    <option value="Gigglu">Giglu😼</option>
+    <option value="Bootki">Butki😆</option>
+  </select>
+  <button onclick="singHappyBirthday()">LISTEN  (step 1)</button>
+  
+  <div id="cakeContainer">
+    <div id="cake" class="cake">
+      <div class="top-tier">
+        <div class="candles">
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+        </div>
+      </div>
+    </div>
+    <div id="splitCake" class="cake-split hidden">
+      <div class="piece"></div>
+      <div class="piece"></div>
+    </div>
+    <button id="blowCandles" onclick="blowOutCandles()" style="display: none;">Blow Candles (step2)</button>
+    <button id="cutCake" onclick="cutCake()" style="display: none;">Cut Cake (step3)</button>
+    <button>(step 4) After This Run Surprise_part_2 File THANK YOU🙂</button>
+  </div>
+  
+  <script>
+    function singHappyBirthday() {
+      const name = document.getElementById("nameSelect").value;
+      const utterance = new SpeechSynthesisUtterance(
+        `Happy Birthday to you, Happy Birthday to you, Happy Birthday dear ${name}, Happy Birthday to you!`
+      );
+      speechSynthesis.speak(utterance);
+      document.getElementById("cakeContainer").style.display = "flex";
+      document.getElementById("blowCandles").style.display = "block";
+      document.getElementById("cutCake").style.display = "block";
+    }
+    function blowOutCandles() {
+      document.querySelectorAll(".flame").forEach(flame => flame.style.display = "none");
+    }
+    function cutCake() {
+      document.getElementById("cake").classList.add("hidden");
+      document.getElementById("splitCake").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

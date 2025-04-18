@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GHATIYA SA SURPRISE🙂</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(45deg, #6a0dad, #9b59b6, #8e44ad);
+      background-size: 400% 400%;
+      animation: shimmer 100s infinite;
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      text-align: center;
+      color: white;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .bubble {
+      background: rgb(95, 5, 109);
+      color: rgb(255, 250, 250);
+      padding: 10px 20px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    #tictactoe, #rpsGame, #guessSection, #rewardBtn, #rewardImage {
+      display: none;
+      margin-top: 40px;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      grid-gap: 5px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .cell {
+      width: 80px;
+      height: 80px;
+      background: white;
+      color: black;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .rps-buttons button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      transition: transform 0.6s;
+    }
+
+    .rps-buttons button:active {
+      transform: scale(1.2);
+    }
+
+    .rps-animation {
+      font-size: 2em;
+      margin: 10px;
+    }
+
+    .animated-choice {
+      display: inline-block;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateX(-100px); opacity: 0; }
+      30% { transform: translateX(0); opacity: 1; }
+    }
+
+    #rewardImage {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #rewardImage img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 5px solid white;
+    }
+
+    #guessSection input {
+      padding: 10px;
+      font-size: 1em;
+      width: 100px;
+    }
+
+    #guessSection {
+      padding: 20px;
+      font-size: 1.2em;
+      margin-top: 50px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🕺</h1>
+  <div class="bubble" id="robotMsg">Wanna find out your TUMHARE JITNI CHHOTU si bekar surprise planned by me😆😆?</div><br>
+  <button onclick="startTicTacToe('yes')">Yes</button>
+  <button onclick="startTicTacToe('yes')">You better click yes🙂🪓</button>
+
+  <div id="tictactoe">
+    <h2>TIC TAC TOE
+        <p>(win this one first🙂)</p> </h2>
+    <div class="board" id="board"></div>
+    <div id="tictactoeResult"></div>
+    <button onclick="restartTicTacToe()">Restart</button>
+  </div>
+
+  <div id="rpsGame">
+    <h2>ROCK PAPER SCISSORS
+         <p>(win this one next😌{although i doubt you can with your level of intellect though😆😆})</p></h2>
+    <div class="rps-buttons">
+      <button onclick="playRPS('rock')"> ROCK🪨</button>
+      <button onclick="playRPS('paper')"> PAPERS📃</button>
+      <button onclick="playRPS('scissors')"> SCISSORS✂️</button>
+    </div>
+    <div id="rpsAnimation"></div>
+    <div id="rpsResult"></div>
+  </div>
+
+  <div id="guessSection">
+    <h2>Guess the Number (1-100)
+        <p>{last one hehe😌}</p><p>[scroll to see hints and other things]</p></h2>
+    <input type="number" id="guessInput" min="1" max="100">
+    <button onclick="checkGuess()">Guess</button>
+    <div id="guessResult"></div>
+  </div>
+
+  <button id="rewardBtn" onclick="showReward()">🎁 See Your Reward</button>
+
+  <div id="rewardImage" onclick="this.style.display='none'">
+    <img src='cvgyuh.jpeg' alt="Reward">
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    let boardState = Array(9).fill('');
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    let confettiShown = false;
+    let rpsWinCount = 0;
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById('guessInput').value);
+      const resultElement = document.getElementById('guessResult');
+
+      if (isNaN(guess)) {
+        resultElement.textContent = "Please enter a valid number!";
+        return;
+      }
+
+      if (guess === secretNumber) {
+        resultElement.textContent = `Correct! The number was ${secretNumber}.(scroll further to find more THANKYOU😌)`;
+        if (!confettiShown) {
+          confetti();
+          confettiShown = true;
+        }
+        document.getElementById('rewardBtn').style.display = 'block'; // Show the reward button
+      } else {
+        const difference = Math.abs(secretNumber - guess);
+        if (difference < 10) {
+          resultElement.textContent = "You're close! Try again.";
+        } else if (guess < secretNumber) {
+          resultElement.textContent = "Too Small! Try a higher number.";
+        } else {
+          resultElement.textContent = "Too Large! Try a smaller number.";
+        }
+      }
+    }
+
+    function createBoard() {
+      const board = document.getElementById('board');
+      board.innerHTML = '';
+      boardState = Array(9).fill('');
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.dataset.index = i;
+        cell.addEventListener('click', () => makeMove(i));
+        board.appendChild(cell);
+      }
+    }
+
+    function makeMove(index) {
+      const cell = document.querySelector(`.cell[data-index='${index}']`);
+      if (boardState[index] === '' && cell && !checkWinner(boardState)) {
+        boardState[index] = 'X';
+        cell.textContent = 'X';
+        if (!checkWinner(boardState)) {
+          aiMove();
+        }
+      }
+    }
+
+    function aiMove() {
+      const emptyIndices = boardState.map((val, i) => val === '' ? i : null).filter(i => i !== null);
+      const index = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+      if (index !== undefined) {
+        boardState[index] = 'O';
+        const cell = document.querySelector(`.cell[data-index='${index}']`);
+        if (cell) cell.textContent = 'O';
+        checkWinner(boardState);
+      }
+    }
+
+    function checkWinner(board) {
+      const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+      ];
+      for (const [a,b,c] of winPatterns) {
+        if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+          document.getElementById('tictactoeResult').textContent = board[a] + ' wins!';
+          triggerConfetti();  // Trigger confetti only on win
+          if (board[a] === 'X') {
+            document.getElementById('rpsGame').style.display = 'block';
+          }
+          return board[a];
+        }
+      }
+      if (!board.includes('')) {
+        document.getElementById('tictactoeResult').textContent = 'Draw!';
+        return 'Draw';
+      }
+      return null;
+    }
+
+    function restartTicTacToe() {
+      document.getElementById('tictactoeResult').textContent = '';
+      createBoard();
+    }
+
+    function startTicTacToe(answer) {
+      if (answer === 'yes') {
+        document.getElementById('tictactoe').style.display = 'block';
+        document.getElementById('rpsGame').style.display = 'none';
+        document.getElementById('guessSection').style.display = 'none';
+        createBoard();
+      }
+    }
+
+    function playRPS(userChoice) {
+      const choices = ['rock', 'paper', 'scissors'];
+      const aiChoice = choices[Math.floor(Math.random() * choices.length)];
+      const result = determineRPSWinner(userChoice, aiChoice);
+      displayRPSResult(userChoice, aiChoice, result);
+
+      // Show the choices with animation
+      document.getElementById('rpsAnimation').innerHTML = `
+        <div class="animated-choice">${userChoice === 'rock' ? '✊' : userChoice === 'paper' ? '🤚' : '✌️'}</div>
+        <div class="animated-choice">${aiChoice === 'rock' ? '🪨' : aiChoice === 'paper' ? '📃' : '✂️'}</div>
+      `;
+
+      // Show the user's choice and AI's choice with animation
+      const userChoiceElement = document.createElement('div');
+      userChoiceElement.textContent = userChoice;
+      userChoiceElement.classList.add('animated-choice');
+      userChoiceElement.style.animation = 'slideIn 0.5s ease';
+      document.getElementById('rpsAnimation').appendChild(userChoiceElement);
+
+      const aiChoiceElement = document.createElement('div');
+      aiChoiceElement.textContent = aiChoice;
+      aiChoiceElement.classList.add('animated-choice');
+      aiChoiceElement.style.animation = 'slideIn 0.5s ease';
+      document.getElementById('rpsAnimation').appendChild(aiChoiceElement);
+
+      if (result === 'You Win') {
+        document.getElementById('guessSection').style.display = 'block';
+      }
+    }
+
+    function determineRPSWinner(userChoice, aiChoice) {
+      if (userChoice === aiChoice) return 'Draw';
+      if ((userChoice === 'rock' && aiChoice === 'scissors') ||
+          (userChoice === 'paper' && aiChoice === 'rock') ||
+          (userChoice === 'scissors' && aiChoice === 'paper')) {
+        return 'You Win';
+      }
+      return 'You Lose';
+    }
+
+    function displayRPSResult(userChoice,    aiChoice,     result) {
+      const rpsResult = document.getElementById('rpsResult');
+      rpsResult.textContent = `You chose ${userChoice}, AI chose ${aiChoice}. ${result}`;
+      if (result === 'You Win') triggerConfetti();  // Trigger confetti only on win
+    }
+
+    function triggerConfetti() {
+      confetti({
+        particleCount: 200,
+        spread: 70,
+        origin: { x: 0.5, y: 0.5 },
+        colors: ['#ff0000', '#00ff00', '#0000ff'],
+      });
+    }
+
+    function showReward() {
+      document.getElementById('rewardImage').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
